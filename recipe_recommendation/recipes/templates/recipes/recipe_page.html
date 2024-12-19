@@ -1,0 +1,79 @@
+{% extends "recipes/base.html" %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+<style>
+    .recipe-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    .recipe-card {
+        max-width: 800px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+    .recipe-card img {
+        width: 100%;
+        height: auto;
+    }
+    .recipe-details {
+        padding: 20px;
+    }
+    .recipe-details h1 {
+        margin-bottom: 10px;
+        color: #333;
+    }
+    .recipe-details p {
+        margin: 10px 0;
+        line-height: 1.6;
+        color: #666;
+    }
+    .ingredients, .instructions {
+        margin: 20px 0;
+    }
+    .ingredients ul {
+        padding-left: 20px;
+    }
+    .download-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .download-btn:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<div class="recipe-container">
+    <div class="recipe-card">
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }} image"> <!-- Ensure recipe.image exists -->
+        <div class="recipe-details">
+            <h1>{{ recipe.title }}</h1>
+            <p><strong>Preparation Time:</strong> {{ recipe.prep_time }} minutes</p>
+            <div class="ingredients">
+                <h3>Ingredients:</h3>
+                <ul>
+                    {% for ingredient in recipe.ingredients.all %}
+                    <li>{{ ingredient.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="instructions">
+                <h3>Instructions:</h3>
+                <p>{{ recipe.instructions }}</p>
+            </div>
+            <a href="{% url 'download_recipe' recipe.id %}" class="download-btn">Download Recipe as PDF</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
