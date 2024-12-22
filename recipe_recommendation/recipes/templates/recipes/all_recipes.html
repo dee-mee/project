@@ -1,0 +1,91 @@
+{% extends "recipes/base.html" %}
+
+{% block title %}All Recipes{% endblock %}
+
+{% block content %}
+<style>
+/* Grid Container */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Recipe Card */
+.recipe-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Recipe Image */
+.recipe-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Recipe Details */
+.recipe-details {
+    padding: 15px;
+}
+
+.recipe-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.recipe-meta {
+    color: #777;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
+.recipe-meta span {
+    margin-right: 10px;
+}
+
+.recipe-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #45f3ff;
+    color: #23242a;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.recipe-btn:hover {
+    background: #1c9dbb;
+}
+</style>
+
+<div class="recipe-grid">
+    {% for recipe in recipes %}
+    <div class="recipe-card">
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+        <div class="recipe-details">
+            <h3 class="recipe-title">{{ recipe.title }}</h3>
+            <p class="recipe-meta">
+                <span>Prep Time: {{ recipe.prep_time }} mins</span>
+                <span>Location: {{ recipe.location.name }}</span>
+            </p>
+            <a href="{% url 'recipe_detail' recipe.id %}" class="recipe-btn">View Recipe</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No recipes available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

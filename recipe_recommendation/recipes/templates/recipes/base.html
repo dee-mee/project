@@ -4,67 +4,235 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Recipe Recommendation System{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
-        /* General styling */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-        }
+           body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background: linear-gradient(to bottom, #0F090B, #362828, #63514F, #8B7069, #AF9284);
+    }
 
-        /* Layout styling */
-        .container {
-            display: flex;
-            flex: 1;
-        }
-
+        /* Sidebar Styling */
         .sidebar {
+            position: fixed; /* Fixed on the left */
+            top: 0;
+            left: 0;
             width: 250px;
+            height: 100vh;
             background-color: #333;
             color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
+            padding: 10px;
+            overflow-y: auto;
+            z-index: 1000;
         }
 
-        .sidebar a {
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            display: block;
             color: white;
             text-decoration: none;
-            margin: 10px 0;
             padding: 10px;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .sidebar a:hover {
+        .sidebar ul li a:hover {
             background-color: #575757;
+            color: #45f3ff;
         }
+
+        .sidebar ul li a.active {
+            background-color: #45f3ff;
+            color: #23242a;
+            font-weight: bold;
+        }
+
+            /* Content Area */
 
         .content {
-            flex: 1;
+            margin-left: 250px; /* Adjusted to fit next to sidebar */
             padding: 20px;
+            flex: 1;
+            background-color: #fff;
         }
 
-        footer {
+     #hero {
+            background: linear-gradient(to right, #ff9800, #f44336);
+            color: white;
             text-align: center;
-            padding: 10px;
-            background-color: #f1f1f1;
+            padding: 10px 5px;
             width: 100%;
         }
 
-        /* Ensure footer does not overlap the sidebar */
-        .footer-container {
+
+
+        #hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        #hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 10px;
+            }
+        }
+            .button {
+        background-color: #ff9800;
+        color: white;
+        padding: 12px 30px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 25px;
+        font-size: 18px;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #e68900;
+    }
+
+    .profile-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 20px;
+            text-align: center;
+        }
+
+    .profile-container h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+    .profile-container p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+    .profile-content {
             display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-left: 250px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+    .about,
+    .details {
+            flex: 1 1 300px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+    .about img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: block;
+    }
+
+    .about p {
+            font-size: 16px;
+            margin: 10px 20px;
+        }
+
+        .messages {
+            text-align: center; /* Center-align text */
+            margin: 20px auto; /* Add vertical spacing */
+            width: 60%; /* Optional: Adjust message bar width */
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .messages .alert {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .messages {
+                width: 90%; /* Adjust for smaller screens */
+            }
+        }
+
+        .details ul {
+            list-style: none;
+            padding: 0;
+            font-size: 16px;
+            text-align: left;
+            margin: 50px;
+        }
+
+        .details ul li {
+            margin-bottom: 10px;
+        }
+
+        .details ul li strong {
+            font-weight: bold;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 20px;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #007bff;
         }
     </style>
 </head>
@@ -72,29 +240,39 @@
     <!-- Main container -->
     <div class="container">
         <!-- Sidebar -->
-        <div class="sidebar">
-            <h2>Navigation</h2>
-            <a href="{% url 'homepage' %}">Homepage</a>
-            <a href="{% url 'profile' %}">Profile</a>
-            <a href="{% url 'history' %}">History</a>
-            <a href="{% url 'contact' %}">Contact</a>
-             {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'signup' %}">Sign Up</a>
-    {% endif %}
-        </div>
+<div class="sidebar">
+    <h2><i class="fa fa-book-open"></i> RecipeFinder</h2>
+
+    <ul>
+    <li><a href="{% url 'homepage' %}" class="{% if request.resolver_match.url_name == 'homepage' %}active{% endif %}"><i class="fas fa-home"></i> Homepage</a></li>
+    <li> <a href="{% url 'profile' %}" class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}"><i class="fas fa-user"></i> Profile</a></li>
+    <li> <a href="{% url 'history' %}" class="{% if request.resolver_match.url_name == 'history' %}active{% endif %}"> <i class="fas fa-history"></i> History</a></li>
+    <li> <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}"><i class="fas fa-envelope"></i> Contact</a></li>
+    <li> <a href="{% url 'all_recipes' %}" class="{% if request.resolver_match.url_name == 'all_recipes' %}active{% endif %}"> <i class="fas fa-utensils"></i> All Recipes</a></li>
+            {% if user.is_authenticated %}
+          <li>   <a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a><li>
+            {% else %}
+         <li>  <a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Login</a></li>
+         <li>    <a href="{% url 'signup' %}"><i class="fa fa-user-plus"></i> Sign Up</a></li>
+            {% endif %}
+    </ul>
+</div>
 
         <!-- Content area -->
         <div class="content">
+
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
             {% block content %}{% endblock %}
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer-container">
-        <p>© 2024 Recipe Recommendation System</p>
-    </footer>
 </body>
 </html>

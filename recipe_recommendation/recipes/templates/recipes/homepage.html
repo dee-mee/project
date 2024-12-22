@@ -1,10 +1,62 @@
 {% extends "recipes/base.html" %}
 {% block title %}Home{% endblock %}
+
 {% block content %}
-<h1>Recipes for {{ location }}</h1>
-<ul>
-    {% for recipe in recipes %}
-    <li>{{ recipe.title }}</li>
-    {% endfor %}
-</ul>
+
+<!-- Hero Section -->
+<section id="hero">
+    <div class="container">
+        <h1>Welcome to RecipeFinder</h1>
+        <p>Discover delicious, healthy, and personalized recipes with just a few clicks. Whether you're a beginner cook or a seasoned chef, RecipeFinder makes it easy to explore new dishes, get personalized recommendations, and make your kitchen experience enjoyable.</p>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works">
+    <div class="container">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>Personalized Recommendations</h3>
+                <p>Tell us your dietary preferences, favorite ingredients, or food restrictions, and we'll suggest recipes tailored to your needs.</p>
+            </div>
+            <div class="step">
+                <h3>Smart Recipe Search</h3>
+                <p>Use our advanced search filters to find recipes based on ingredients you have, cooking time, or cuisine type.</p>
+            </div>
+            <div class="step">
+                <h3>Save Your Favorites</h3>
+                <p>Keep track of your favorite recipes by saving them to your profile for easy access anytime.</p>
+            </div>
+            <div class="step">
+                <h3>Nutrition Information</h3>
+                <p>Each recipe includes nutritional details so you can make informed decisions about your meals.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features">
+    <div class="container">
+        <h2>Features</h2>
+        <ul>
+            <li>Recipe Recommendations: Tailored suggestions based on your preferences.</li>
+            <li>Search Filters: Find recipes by ingredients, cuisine, or cooking time.</li>
+            <li>Nutrition Facts: See detailed information about each recipe's nutrition.</li>
+            <li>User Profile: Save your favorite recipes and track your culinary progress.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Get Started Section -->
+<section id="get-started">
+    <div class="container">
+        <h2>Start Exploring!</h2>
+        <p>Log in to start getting personalized recipe recommendations or sign up to save your favorites!</p>
+        <a href="/login/" class="button">Log In</a>
+        <a href="/signup/" class="button">Sign Up</a>
+    </div>
+</section>
+
 {% endblock %}

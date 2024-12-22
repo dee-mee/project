@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "recipes/base.html" %}
 
-</body>
-</html>
+{% block content %}
+<div class="profile-container">
+    <h1>History</h1>
+    <p>Welcome, {{ name }}!</p>
+
+    <div class="history-list">
+        {% if history %}
+            <ul>
+                {% for item in history %}
+                    <li>
+                        <strong>{{ item.timestamp|date:"F j, Y, g:i a" }}</strong>: {{ item.action }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No history available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

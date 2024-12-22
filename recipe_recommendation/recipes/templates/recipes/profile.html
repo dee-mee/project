@@ -1,9 +1,30 @@
 {% extends "recipes/base.html" %}
 
-{% block title %}Profile{% endblock %}
-
 {% block content %}
-<h1>Profile</h1>
-<p><strong>Email:</strong> {{ user_email }}</p>
-<p>Welcome to your profile!</p>
+<div class="profile-container">
+    <h1>Profile</h1>
+    <p>Welcome, {{ name }}!</p>
+    <div class="profile-content">
+        <div class="about">
+            <img src="https://via.placeholder.com/150" alt="Profile Picture">
+            <p>
+                I am an all-round web developer. I am a senior programmer with good knowledge
+                of front-end techniques. Vitae sapien pellentesque habitant morbi tristique
+                senectus et. Aenean sed adipiscing diam donec adipiscing tristique risus.
+            </p>
+        </div>
+        <div class="details">
+            <ul>
+                <li><strong>Name:</strong> {{ name }}</li>
+                <li><strong>Email:</strong> {{ Email }}</li>
+                <li><strong>Location:</strong> {{ location }}</li>
+            </ul>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
