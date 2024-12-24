@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "manage.py",
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": [
+          "**/*.py",
+          "**/static/**",
+          "**/templates/**",
+          "**/media/**"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "manage.py"
+    }
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "recipe_recommendation.settings",
+    "SECRET_KEY": "django-insecure-z33pswzq$zs7c)!ivea^z5o$f&q&tt#vb+v54)d1tra#za@e3*",
+    "DEBUG": "false"
+  }
+}
