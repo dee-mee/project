@@ -1,31 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Ingredient(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
 
 class Location(models.Model):
-    name = models.CharField(max_length=100)
-
-
-    def __str__(self):
-        return self.name
-
-class Ingredient(models.Model):
-    """Model to store individual ingredients."""
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
+
 
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
-    ingredients = models.ManyToManyField('Ingredient')
-    location = models.ForeignKey('Location', on_delete=models.CASCADE)
     instructions = models.TextField()
     prep_time = models.IntegerField()
-    image = models.ImageField(upload_to='recipe_images/', null=True, blank=True)
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
+    ingredients = models.ManyToManyField(Ingredient)  # Ensure this is defined
 
     def __str__(self):
         return self.title
+
 
 
 class UserTry(models.Model):

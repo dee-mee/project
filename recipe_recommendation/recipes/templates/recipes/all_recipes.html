@@ -74,7 +74,11 @@
 <div class="recipe-grid">
     {% for recipe in recipes %}
     <div class="recipe-card">
-        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+        {% if recipe.image %}
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}">
+        {% else %}
+            <img src="recipe_recommendation/recipe_images" alt="No image available">
+        {% endif %}
         <div class="recipe-details">
             <h3 class="recipe-title">{{ recipe.title }}</h3>
             <p class="recipe-meta">

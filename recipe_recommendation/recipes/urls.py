@@ -1,8 +1,12 @@
+from django.template.context_processors import static
 from django.urls import path
 from .views import homepage, recipe_detail, profile, contact_view, landing_page, history_view, all_recipes, download_recipe, \
     history_view
 from django.contrib.auth import views as auth_views
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', landing_page, name='landing_page'),  # Landing Page
@@ -16,5 +20,5 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='recipes/login.html'), name='login'),  # Login URL
     path('signup/', views.signup, name='signup'),  # Signup URL
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),  # Logout URL
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

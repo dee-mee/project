@@ -15,6 +15,8 @@ class RecipeAdmin(admin.ModelAdmin):
         return ", ".join([ingredient.name for ingredient in obj.ingredients.all()])
     get_ingredients.short_description = 'Ingredients'
 
+
+
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
     """Customize the Ingredient admin interface."""
